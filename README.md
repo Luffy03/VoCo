@@ -24,7 +24,7 @@ Self-Supervised Learning (SSL) has demonstrated promising results in 3D medical 
 If you find this repo useful for your research, please consider citing the paper as follows:
 
 ```
-@ARTICLE{DCA,
+@ARTICLE{VoCo,
   author={Wu, Linshan and Zhuang, Jiaxin and Chen, Hao},
   journal={CVPR}, 
   title={VoCo: A Simple-yet-Effective Volume Contrastive Learning Framework for 3D Medical Image Analysis}, 
