@@ -17,7 +17,7 @@ Self-Supervised Learning (SSL) has demonstrated promising results in 3D medical 
 ## Performance
 Our checkpoints 10K pre-trained checkpoint is available at [VoCo_10k.pt](https://www.dropbox.com/scl/fi/35ldfszlvw1ke4vr7xr5h/VoCo_10k.pt?rlkey=iu3muui9420soyjwlui79njmq&dl=0). 
 
-| Method | Dataset | Pre-trained checkpoint | BTCV |
+| Method | Dataset | Pre-trained checkpoint | BTCV ||
 | **VoCo** | 10k | [VoCo_10k.pt](https://www.dropbox.com/scl/fi/35ldfszlvw1ke4vr7xr5h/VoCo_10k.pt?rlkey=iu3muui9420soyjwlui79njmq&dl=0) | 85.89 |
 
 ## Usage
