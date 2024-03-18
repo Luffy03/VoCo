@@ -14,7 +14,7 @@ Self-Supervised Learning (SSL) has demonstrated promising results in 3D medical 
 ![teaser](assets/framework.png)
 
 ## Performance
-
+Our checkpoints will soon be available.
 ## Usage
 ### Prepare Dataset
 First, you need to download the pre-training dataset. The 10k dataset are all open-source and you can download yourself. Or you can wait until we upload them to the hugging face.
@@ -43,6 +43,7 @@ To pre-train:
 sh train.sh
 ```
 ### Finetune
+Our finetune codes will soon be available, or you can directly use the codes in [MONAI](https://github.com/Project-MONAI/research-contributions).
 ## Acknowledgement
 We thank [MONAI](https://github.com/Project-MONAI/research-contributions) for part of their codes.
 ## Citation ✏️ 📄
