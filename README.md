@@ -18,7 +18,7 @@ Self-Supervised Learning (SSL) has demonstrated promising results in 3D medical 
 Our checkpoints will soon be available.
 ## Usage
 ### Prepare Dataset
-First, you need to download the pre-training dataset. The 10k dataset are all open-source and you can download yourself. Or you can wait until we upload them to the hugging face.
+First, you need to download the pre-training dataset. The 10k dataset are all open-source and you can download yourself. Or you can download it in our [hugging face repo](https://huggingface.co/datasets/Luffy503/VoCo-10k).
 ![teaser](assets/10k.png)
 Note: 10k dataset is collected by Dr. <a href="https://scholar.google.com/citations?user=PfM5gucAAAAJ&hl=en">Jiaxin Zhuang</a>
 ```
