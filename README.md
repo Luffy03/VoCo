@@ -16,6 +16,18 @@ Self-Supervised Learning (SSL) has demonstrated promising results in 3D medical 
 ## Performance
 
 ## Usage
+### Prepare Dataset
+First, you need to download the pre-training dataset. The 10k dataset are all open-source and you can download yourself. Or you can wait until we upload them to the hugging face.
+![teaser](assets/framework.png)
+├── data
+    ├── BTCV
+    ├── TCIAcovid19
+    ├── Luna16-jx
+    ├── stoic21
+    ├── Totalsegmentator_dataset
+    ├── Totalsegmentator_dataset
+    ├── Flare23
+    └── HNSCC_convert_v1
 
 ## Citation ✏️ 📄
 
