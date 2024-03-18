@@ -28,7 +28,6 @@ Note: 10k dataset is collected by Dr. <a href="https://scholar.google.com/citati
     ├── Luna16-jx
     ├── stoic21
     ├── Totalsegmentator_dataset
-    ├── Totalsegmentator_dataset
     ├── Flare23
     └── HNSCC_convert_v1
 ```
