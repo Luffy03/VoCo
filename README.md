@@ -16,6 +16,8 @@ Self-Supervised Learning (SSL) has demonstrated promising results in 3D medical 
 
 ## Performance
 Our checkpoints 10K pre-trained checkpoint is available at [VoCo_10k.pt](https://www.dropbox.com/scl/fi/35ldfszlvw1ke4vr7xr5h/VoCo_10k.pt?rlkey=iu3muui9420soyjwlui79njmq&dl=0). 
+| Method | Dataset | Pre-trained checkpoint | BTCV |
+| **VoCo** | 10k | [VoCo_10k.pt](https://www.dropbox.com/scl/fi/35ldfszlvw1ke4vr7xr5h/VoCo_10k.pt?rlkey=iu3muui9420soyjwlui79njmq&dl=0) | 85.89 |
 ## Usage
 ### Prepare Dataset
 First, you need to download the pre-training dataset. The 10k dataset are all open-source and you can download yourself. Or you can download it in our [hugging face repo](https://huggingface.co/datasets/Luffy503/VoCo-10k/tree/main).
