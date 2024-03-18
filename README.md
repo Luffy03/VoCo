@@ -17,6 +17,14 @@ Self-Supervised Learning (SSL) has demonstrated promising results in 3D medical 
 ## Performance
 Our checkpoints 10K pre-trained checkpoint is available at [VoCo_10k.pt](https://www.dropbox.com/scl/fi/35ldfszlvw1ke4vr7xr5h/VoCo_10k.pt?rlkey=iu3muui9420soyjwlui79njmq&dl=0). 
 
+| Method | Params | KITTI || NYUv2 || Sintel || DDAD || ETH3D || DIODE ||
+|-|-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| | | AbsRel | $\delta_1$ | AbsRel | $\delta_1$ | AbsRel | $\delta_1$ | AbsRel | $\delta_1$ | AbsRel | $\delta_1$ | AbsRel | $\delta_1$ |
+| MiDaS | 345.0M | 0.127 | 0.850 | 0.048 | *0.980* | 0.587 | 0.699 | 0.251 | 0.766 | 0.139 | 0.867 | 0.075 | 0.942 | 
+| **Ours-S** | 24.8M | 0.080 | 0.936 | 0.053 | 0.972 | 0.464 | 0.739 | 0.247 | 0.768 | 0.127 | **0.885** | 0.076 | 0.939 |
+| **Ours-B** | 97.5M | *0.080* | *0.939* | *0.046* | 0.979 | **0.432** | *0.756* | *0.232* | *0.786* | **0.126** | *0.884* | *0.069* | *0.946* |
+| **Ours-L** | 335.3M | **0.076** | **0.947** | **0.043** | **0.981** | *0.458* | **0.760** | **0.230** | **0.789** | *0.127* | 0.882 | **0.066** | **0.952** |
+
 | Method | Dataset | Pre-trained checkpoint | BTCV ||
 | **VoCo** | 10k | [VoCo_10k.pt](https://www.dropbox.com/scl/fi/35ldfszlvw1ke4vr7xr5h/VoCo_10k.pt?rlkey=iu3muui9420soyjwlui79njmq&dl=0) | 85.89 |
 
