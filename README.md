@@ -31,8 +31,19 @@ Note: 10k dataset is collected by Dr. <a href="https://scholar.google.com/citati
     ├── Flare23
     └── HNSCC_convert_v1
 ```
+### Pre-Training
+Note that in this repo, we present the version of our 10k pre-training, thus some details may be different to our paper.
+To accerlate the training, we use "Persistentdataset" to pre-cache dataset, which requires extra storage. It is important in our codes. 
+If you don't have enough storage, you can change it back in "utils/data_utils.py".
+To pre-train: 
+```bash 
+sh scripts/train_voc.sh <num_gpu> <port>
+sh scripts/train_city.sh <num_gpu> <port>
+```
+### Finetune
+## Acknowledgement
+We thank [MONAI](https://github.com/Project-MONAI/research-contributions) for part of their codes.
 ## Citation ✏️ 📄
-
 If you find this repo useful for your research, please consider citing the paper as follows:
 
 ```
