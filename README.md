@@ -33,8 +33,11 @@ Note: 10k dataset is collected by Dr. <a href="https://scholar.google.com/citati
 ```
 ### Pre-Training
 Note that in this repo, we present the version of our 10k pre-training, thus some details may be different to our paper.
+
 To accerlate the training, we use "Persistentdataset" to pre-cache dataset, which requires extra storage. It is important in our codes. 
+
 If you don't have enough storage, you can change it back in "utils/data_utils.py".
+
 To pre-train: 
 ```bash 
 sh train.sh
