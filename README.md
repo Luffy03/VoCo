@@ -29,8 +29,6 @@ Note: 10k dataset is collected by Dr. <a href="https://scholar.google.com/citati
 ├── data
     ├── BTCV
     ├── TCIAcovid19
-    ├── MM-WHS
-    ├── Spleen
     ├── Luna16-jx
     ├── stoic21
     ├── Totalsegmentator_dataset
