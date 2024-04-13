@@ -1,0 +1,48 @@
+A. convert
+python Dataset220_KiTS2023.py /data/linshan/CTs/kits23/dataset/
+python Dataset218_Amos2022_task1.py /data/linshan/CTs/Amos2022/
+nnUNetv2_convert_old_nnUNet_dataset /data/linshan/CTs/Amos2022/  /data/linshan/nnunet_data/nnUNet_raw/Dataset218_Amos2022
+
+B. pre-process
+nnUNetv2_plan_and_preprocess -d 003 -c 3d_fullres --verbose --verify_dataset_integrity
+
+nnUNetv2_plan_and_preprocess -d 218 -c 3d_fullres --verbose --verify_dataset_integrity
+
+C. training
+CUDA_VISIBLE_DEVICES=0 nnUNetv2_train 008 3d_fullres 0 -tr nnUNetTrainer_250epochs --val
+
+CUDA_VISIBLE_DEVICES=1 nnUNetv2_train 002 3d_fullres 0 -tr nnUNetTrainer_swin_pre
+
+CUDA_VISIBLE_DEVICES=5 nnUNetv2_train 009 3d_fullres 0 -tr nnUNetTrainer_250epochs
+
+CUDA_VISIBLE_DEVICES=5 nnUNetv2_train 010 3d_fullres 0 -tr nnUNetTrainer_250epochs
+
+CUDA_VISIBLE_DEVICES=5 nnUNetv2_train 218 3d_fullres 0 -tr nnUNetTrainer_250epochs
+
+D. inference
+CUDA_VISIBLE_DEVICES=4 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset017_BTCV/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset017_BTCV/imagesTs_pred -d 017 -f 0 -c 3d_fullres --verbose
+
+CUDA_VISIBLE_DEVICES=5 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset003_Liver/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset003_Liver/imagesTs_pred -d 003 -f 0 -c 3d_fullres --verbose
+
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset006_Lung/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset006_Lung/imagesTs_pred -d 006 -f 0 -c 3d_fullres --verbose -tr nnUNetTrainer_250epochs
+
+
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset001_BrainTumour/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset001_BrainTumour/imagesTs_pred -d 001 -f 0 -c 3d_fullres --verbose
+
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset002_Heart/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset002_Heart/imagesTs_pred -d 002 -f 0 -c 3d_fullres --verbose
+
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset004_Hippocampus/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset004_Hippocampus/imagesTs_pred -d 004 -f 0 -c 3d_fullres --verbose -tr nnUNetTrainer_250epochs
+
+CUDA_VISIBLE_DEVICES=5 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset005_Prostate/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset005_Prostate/imagesTs_pred -d 005 -f 0 -c 3d_fullres --verbose -tr nnUNetTrainer_250epochs
+
+CUDA_VISIBLE_DEVICES=5 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset007_Pancreas/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset007_Pancreas/imagesTs_pred -d 007 -f 0 -c 3d_fullres --verbose -tr nnUNetTrainer_250epochs
+
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset008_HepaticVessel/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset008_HepaticVessel/imagesTs_pred -d 008 -f 0 -c 3d_fullres --verbose -tr nnUNetTrainer_250epochs
+
+CUDA_VISIBLE_DEVICES=5 nnUNetv2_predict -i /data/linshan/nnunet_data/nnUNet_raw/Dataset218_AMOS2022_postChallenge_task1/imagesTs/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset218_AMOS2022_postChallenge_task1/imagesTs_pred -d 218 -f 0 -c 3d_fullres --verbose -tr nnUNetTrainer_250epochs --verbose -npp 1 -nps 1
+
+--disable_tta
+
+
+### predict colon cancer for flare23
+CUDA_VISIBLE_DEVICES=3 nnUNetv2_predict -i /data/linshan/CTs/Flare23/Flare23_test/ -o /data/linshan/nnunet_data/nnUNet_pred/Dataset010_Colon_flare23/flare23_imagesTs_pred -d 010 -f 0 -c 3d_fullres --verbose -tr nnUNetTrainer_250epochs

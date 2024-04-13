@@ -1,0 +1,383 @@
+Metadata-Version: 2.1
+Name: nnunetv2
+Version: 2.2.1
+Summary: nnU-Net is a framework for out-of-the box image segmentation.
+Author: Helmholtz Imaging Applied Computer Vision Lab
+Author-email: Fabian Isensee <f.isensee@dkfz-heidelberg.de>
+License:                                  Apache License
+                                   Version 2.0, January 2004
+                                http://www.apache.org/licenses/
+        
+           TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+        
+           1. Definitions.
+        
+              "License" shall mean the terms and conditions for use, reproduction,
+              and distribution as defined by Sections 1 through 9 of this document.
+        
+              "Licensor" shall mean the copyright owner or entity authorized by
+              the copyright owner that is granting the License.
+        
+              "Legal Entity" shall mean the union of the acting entity and all
+              other entities that control, are controlled by, or are under common
+              control with that entity. For the purposes of this definition,
+              "control" means (i) the power, direct or indirect, to cause the
+              direction or management of such entity, whether by contract or
+              otherwise, or (ii) ownership of fifty percent (50%) or more of the
+              outstanding shares, or (iii) beneficial ownership of such entity.
+        
+              "You" (or "Your") shall mean an individual or Legal Entity
+              exercising permissions granted by this License.
+        
+              "Source" form shall mean the preferred form for making modifications,
+              including but not limited to software source code, documentation
+              source, and configuration files.
+        
+              "Object" form shall mean any form resulting from mechanical
+              transformation or translation of a Source form, including but
+              not limited to compiled object code, generated documentation,
+              and conversions to other media types.
+        
+              "Work" shall mean the work of authorship, whether in Source or
+              Object form, made available under the License, as indicated by a
+              copyright notice that is included in or attached to the work
+              (an example is provided in the Appendix below).
+        
+              "Derivative Works" shall mean any work, whether in Source or Object
+              form, that is based on (or derived from) the Work and for which the
+              editorial revisions, annotations, elaborations, or other modifications
+              represent, as a whole, an original work of authorship. For the purposes
+              of this License, Derivative Works shall not include works that remain
+              separable from, or merely link (or bind by name) to the interfaces of,
+              the Work and Derivative Works thereof.
+        
+              "Contribution" shall mean any work of authorship, including
+              the original version of the Work and any modifications or additions
+              to that Work or Derivative Works thereof, that is intentionally
+              submitted to Licensor for inclusion in the Work by the copyright owner
+              or by an individual or Legal Entity authorized to submit on behalf of
+              the copyright owner. For the purposes of this definition, "submitted"
+              means any form of electronic, verbal, or written communication sent
+              to the Licensor or its representatives, including but not limited to
+              communication on electronic mailing lists, source code control systems,
+              and issue tracking systems that are managed by, or on behalf of, the
+              Licensor for the purpose of discussing and improving the Work, but
+              excluding communication that is conspicuously marked or otherwise
+              designated in writing by the copyright owner as "Not a Contribution."
+        
+              "Contributor" shall mean Licensor and any individual or Legal Entity
+              on behalf of whom a Contribution has been received by Licensor and
+              subsequently incorporated within the Work.
+        
+           2. Grant of Copyright License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              copyright license to reproduce, prepare Derivative Works of,
+              publicly display, publicly perform, sublicense, and distribute the
+              Work and such Derivative Works in Source or Object form.
+        
+           3. Grant of Patent License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              (except as stated in this section) patent license to make, have made,
+              use, offer to sell, sell, import, and otherwise transfer the Work,
+              where such license applies only to those patent claims licensable
+              by such Contributor that are necessarily infringed by their
+              Contribution(s) alone or by combination of their Contribution(s)
+              with the Work to which such Contribution(s) was submitted. If You
+              institute patent litigation against any entity (including a
+              cross-claim or counterclaim in a lawsuit) alleging that the Work
+              or a Contribution incorporated within the Work constitutes direct
+              or contributory patent infringement, then any patent licenses
+              granted to You under this License for that Work shall terminate
+              as of the date such litigation is filed.
+        
+           4. Redistribution. You may reproduce and distribute copies of the
+              Work or Derivative Works thereof in any medium, with or without
+              modifications, and in Source or Object form, provided that You
+              meet the following conditions:
+        
+              (a) You must give any other recipients of the Work or
+                  Derivative Works a copy of this License; and
+        
+              (b) You must cause any modified files to carry prominent notices
+                  stating that You changed the files; and
+        
+              (c) You must retain, in the Source form of any Derivative Works
+                  that You distribute, all copyright, patent, trademark, and
+                  attribution notices from the Source form of the Work,
+                  excluding those notices that do not pertain to any part of
+                  the Derivative Works; and
+        
+              (d) If the Work includes a "NOTICE" text file as part of its
+                  distribution, then any Derivative Works that You distribute must
+                  include a readable copy of the attribution notices contained
+                  within such NOTICE file, excluding those notices that do not
+                  pertain to any part of the Derivative Works, in at least one
+                  of the following places: within a NOTICE text file distributed
+                  as part of the Derivative Works; within the Source form or
+                  documentation, if provided along with the Derivative Works; or,
+                  within a display generated by the Derivative Works, if and
+                  wherever such third-party notices normally appear. The contents
+                  of the NOTICE file are for informational purposes only and
+                  do not modify the License. You may add Your own attribution
+                  notices within Derivative Works that You distribute, alongside
+                  or as an addendum to the NOTICE text from the Work, provided
+                  that such additional attribution notices cannot be construed
+                  as modifying the License.
+        
+              You may add Your own copyright statement to Your modifications and
+              may provide additional or different license terms and conditions
+              for use, reproduction, or distribution of Your modifications, or
+              for any such Derivative Works as a whole, provided Your use,
+              reproduction, and distribution of the Work otherwise complies with
+              the conditions stated in this License.
+        
+           5. Submission of Contributions. Unless You explicitly state otherwise,
+              any Contribution intentionally submitted for inclusion in the Work
+              by You to the Licensor shall be under the terms and conditions of
+              this License, without any additional terms or conditions.
+              Notwithstanding the above, nothing herein shall supersede or modify
+              the terms of any separate license agreement you may have executed
+              with Licensor regarding such Contributions.
+        
+           6. Trademarks. This License does not grant permission to use the trade
+              names, trademarks, service marks, or product names of the Licensor,
+              except as required for reasonable and customary use in describing the
+              origin of the Work and reproducing the content of the NOTICE file.
+        
+           7. Disclaimer of Warranty. Unless required by applicable law or
+              agreed to in writing, Licensor provides the Work (and each
+              Contributor provides its Contributions) on an "AS IS" BASIS,
+              WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+              implied, including, without limitation, any warranties or conditions
+              of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+              PARTICULAR PURPOSE. You are solely responsible for determining the
+              appropriateness of using or redistributing the Work and assume any
+              risks associated with Your exercise of permissions under this License.
+        
+           8. Limitation of Liability. In no event and under no legal theory,
+              whether in tort (including negligence), contract, or otherwise,
+              unless required by applicable law (such as deliberate and grossly
+              negligent acts) or agreed to in writing, shall any Contributor be
+              liable to You for damages, including any direct, indirect, special,
+              incidental, or consequential damages of any character arising as a
+              result of this License or out of the use or inability to use the
+              Work (including but not limited to damages for loss of goodwill,
+              work stoppage, computer failure or malfunction, or any and all
+              other commercial damages or losses), even if such Contributor
+              has been advised of the possibility of such damages.
+        
+           9. Accepting Warranty or Additional Liability. While redistributing
+              the Work or Derivative Works thereof, You may choose to offer,
+              and charge a fee for, acceptance of support, warranty, indemnity,
+              or other liability obligations and/or rights consistent with this
+              License. However, in accepting such obligations, You may act only
+              on Your own behalf and on Your sole responsibility, not on behalf
+              of any other Contributor, and only if You agree to indemnify,
+              defend, and hold each Contributor harmless for any liability
+              incurred by, or claims asserted against, such Contributor by reason
+              of your accepting any such warranty or additional liability.
+        
+           END OF TERMS AND CONDITIONS
+        
+           APPENDIX: How to apply the Apache License to your work.
+        
+              To apply the Apache License to your work, attach the following
+              boilerplate notice, with the fields enclosed by brackets "[]"
+              replaced with your own identifying information. (Don't include
+              the brackets!)  The text should be enclosed in the appropriate
+              comment syntax for the file format. We also recommend that a
+              file or class name and description of purpose be included on the
+              same "printed page" as the copyright notice for easier
+              identification within third-party archives.
+        
+           Copyright [2019] [Division of Medical Image Computing, German Cancer Research Center (DKFZ), Heidelberg, Germany]
+        
+           Licensed under the Apache License, Version 2.0 (the "License");
+           you may not use this file except in compliance with the License.
+           You may obtain a copy of the License at
+        
+               http://www.apache.org/licenses/LICENSE-2.0
+        
+           Unless required by applicable law or agreed to in writing, software
+           distributed under the License is distributed on an "AS IS" BASIS,
+           WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+           See the License for the specific language governing permissions and
+           limitations under the License.
+Project-URL: homepage, https://github.com/MIC-DKFZ/nnUNet
+Project-URL: repository, https://github.com/MIC-DKFZ/nnUNet
+Keywords: deep learning,image segmentation,semantic segmentation,medical image analysis,medical image segmentation,nnU-Net,nnunet
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Healthcare Industry
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Image Recognition
+Classifier: Topic :: Scientific/Engineering :: Medical Science Apps.
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch>=2.0.0
+Requires-Dist: acvl-utils>=0.2
+Requires-Dist: dynamic-network-architectures>=0.2
+Requires-Dist: tqdm
+Requires-Dist: dicom2nifti
+Requires-Dist: scipy
+Requires-Dist: batchgenerators>=0.25
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: scikit-image>=0.19.3
+Requires-Dist: SimpleITK>=2.2.1
+Requires-Dist: pandas
+Requires-Dist: graphviz
+Requires-Dist: tifffile
+Requires-Dist: requests
+Requires-Dist: nibabel
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Requires-Dist: imagecodecs
+Requires-Dist: yacs
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+
+# Welcome to the new nnU-Net!
+
+Click [here](https://github.com/MIC-DKFZ/nnUNet/tree/nnunetv1) if you were looking for the old one instead.
+
+Coming from V1? Check out the [TLDR Migration Guide](documentation/tldr_migration_guide_from_v1.md). Reading the rest of the documentation is still strongly recommended ;-)
+
+# What is nnU-Net?
+Image datasets are enormously diverse: image dimensionality (2D, 3D), modalities/input channels (RGB image, CT, MRI, microscopy, ...), 
+image sizes, voxel sizes, class ratio, target structure properties and more change substantially between datasets. 
+Traditionally, given a new problem, a tailored solution needs to be manually designed and optimized  - a process that 
+is prone to errors, not scalable and where success is overwhelmingly determined by the skill of the experimenter. Even 
+for experts, this process is anything but simple: there are not only many design choices and data properties that need to 
+be considered, but they are also tightly interconnected, rendering reliable manual pipeline optimization all but impossible! 
+
+![nnU-Net overview](documentation/assets/nnU-Net_overview.png)
+
+**nnU-Net is a semantic segmentation method that automatically adapts to a given dataset. It will analyze the provided 
+training cases and automatically configure a matching U-Net-based segmentation pipeline. No expertise required on your 
+end! You can simply train the models and use them for your application**.
+
+Upon release, nnU-Net was evaluated on 23 datasets belonging to competitions from the biomedical domain. Despite competing 
+with handcrafted solutions for each respective dataset, nnU-Net's fully automated pipeline scored several first places on 
+open leaderboards! Since then nnU-Net has stood the test of time: it continues to be used as a baseline and method 
+development framework ([9 out of 10 challenge winners at MICCAI 2020](https://arxiv.org/abs/2101.00232) and 5 out of 7 
+in MICCAI 2021 built their methods on top of nnU-Net, 
+ [we won AMOS2022 with nnU-Net](https://amos22.grand-challenge.org/final-ranking/))!
+
+Please cite the [following paper](https://www.google.com/url?q=https://www.nature.com/articles/s41592-020-01008-z&sa=D&source=docs&ust=1677235958581755&usg=AOvVaw3dWL0SrITLhCJUBiNIHCQO) when using nnU-Net:
+
+    Isensee, F., Jaeger, P. F., Kohl, S. A., Petersen, J., & Maier-Hein, K. H. (2021). nnU-Net: a self-configuring 
+    method for deep learning-based biomedical image segmentation. Nature methods, 18(2), 203-211.
+
+
+## What can nnU-Net do for you?
+If you are a **domain scientist** (biologist, radiologist, ...) looking to analyze your own images, nnU-Net provides 
+an out-of-the-box solution that is all but guaranteed to provide excellent results on your individual dataset. Simply 
+convert your dataset into the nnU-Net format and enjoy the power of AI - no expertise required!
+
+If you are an **AI researcher** developing segmentation methods, nnU-Net:
+- offers a fantastic out-of-the-box applicable baseline algorithm to compete against
+- can act as a method development framework to test your contribution on a large number of datasets without having to 
+tune individual pipelines (for example evaluating a new loss function)
+- provides a strong starting point for further dataset-specific optimizations. This is particularly used when competing 
+in segmentation challenges
+- provides a new perspective on the design of segmentation methods: maybe you can find better connections between 
+dataset properties and best-fitting segmentation pipelines?
+
+## What is the scope of nnU-Net?
+nnU-Net is built for semantic segmentation. It can handle 2D and 3D images with arbitrary 
+input modalities/channels. It can understand voxel spacings, anisotropies and is robust even when classes are highly
+imbalanced.
+
+nnU-Net relies on supervised learning, which means that you need to provide training cases for your application. The number of 
+required training cases varies heavily depending on the complexity of the segmentation problem. No 
+one-fits-all number can be provided here! nnU-Net does not require more training cases than other solutions - maybe 
+even less due to our extensive use of data augmentation. 
+
+nnU-Net expects to be able to process entire images at once during preprocessing and postprocessing, so it cannot 
+handle enormous images. As a reference: we tested images from 40x40x40 pixels all the way up to 1500x1500x1500 in 3D 
+and 40x40 up to ~30000x30000 in 2D! If your RAM allows it, larger is always possible.
+
+## How does nnU-Net work?
+Given a new dataset, nnU-Net will systematically analyze the provided training cases and create a 'dataset fingerprint'. 
+nnU-Net then creates several U-Net configurations for each dataset: 
+- `2d`: a 2D U-Net (for 2D and 3D datasets)
+- `3d_fullres`: a 3D U-Net that operates on a high image resolution (for 3D datasets only)
+- `3d_lowres` → `3d_cascade_fullres`: a 3D U-Net cascade where first a 3D U-Net operates on low resolution images and 
+then a second high-resolution 3D U-Net refined the predictions of the former (for 3D datasets with large image sizes only)
+
+**Note that not all U-Net configurations are created for all datasets. In datasets with small image sizes, the 
+U-Net cascade (and with it the 3d_lowres configuration) is omitted because the patch size of the full 
+resolution U-Net already covers a large part of the input images.**
+
+nnU-Net configures its segmentation pipelines based on a three-step recipe:
+- **Fixed parameters** are not adapted. During development of nnU-Net we identified a robust configuration (that is, certain architecture and training properties) that can 
+simply be used all the time. This includes, for example, nnU-Net's loss function, (most of the) data augmentation strategy and learning rate.
+- **Rule-based parameters** use the dataset fingerprint to adapt certain segmentation pipeline properties by following 
+hard-coded heuristic rules. For example, the network topology (pooling behavior and depth of the network architecture) 
+are adapted to the patch size; the patch size, network topology and batch size are optimized jointly given some GPU 
+memory constraint. 
+- **Empirical parameters** are essentially trial-and-error. For example the selection of the best U-net configuration 
+for the given dataset (2D, 3D full resolution, 3D low resolution, 3D cascade) and the optimization of the postprocessing strategy.
+
+## How to get started?
+Read these:
+- [Installation instructions](documentation/installation_instructions.md)
+- [Dataset conversion](documentation/dataset_format.md)
+- [Usage instructions](documentation/how_to_use_nnunet.md)
+
+Additional information:
+- [Region-based training](documentation/region_based_training.md)
+- [Manual data splits](documentation/manual_data_splits.md)
+- [Pretraining and finetuning](documentation/pretraining_and_finetuning.md)
+- [Intensity Normalization in nnU-Net](documentation/explanation_normalization.md)
+- [Manually editing nnU-Net configurations](documentation/explanation_plans_files.md)
+- [Extending nnU-Net](documentation/extending_nnunet.md)
+- [What is different in V2?](documentation/changelog.md)
+
+Competitions:
+- [AutoPET II](documentation/competitions/AutoPETII.md)
+
+[//]: # (- [Ignore label]&#40;documentation/ignore_label.md&#41;)
+
+## Where does nnU-Net perform well and where does it not perform?
+nnU-Net excels in segmentation problems that need to be solved by training from scratch, 
+for example: research applications that feature non-standard image modalities and input channels,
+challenge datasets from the biomedical domain, majority of 3D segmentation problems, etc . We have yet to find a 
+dataset for which nnU-Net's working principle fails!
+
+Note: On standard segmentation 
+problems, such as 2D RGB images in ADE20k and Cityscapes, fine-tuning a foundation model (that was pretrained on a large corpus of 
+similar images, e.g. Imagenet 22k, JFT-300M) will provide better performance than nnU-Net! That is simply because these 
+models allow much better initialization. Foundation models are not supported by nnU-Net as 
+they 1) are not useful for segmentation problems that deviate from the standard setting (see above mentioned 
+datasets), 2) would typically only support 2D architectures and 3) conflict with our core design principle of carefully adapting 
+the network topology for each dataset (if the topology is changed one can no longer transfer pretrained weights!) 
+
+## What happened to the old nnU-Net?
+The core of the old nnU-Net was hacked together in a short time period while participating in the Medical Segmentation 
+Decathlon challenge in 2018. Consequently, code structure and quality were not the best. Many features 
+were added later on and didn't quite fit into the nnU-Net design principles. Overall quite messy, really. And annoying to work with.
+
+nnU-Net V2 is a complete overhaul. The "delete everything and start again" kind. So everything is better 
+(in the author's opinion haha). While the segmentation performance [remains the same](https://docs.google.com/spreadsheets/d/13gqjIKEMPFPyMMMwA1EML57IyoBjfC3-QCTn4zRN_Mg/edit?usp=sharing), a lot of cool stuff has been added. 
+It is now also much easier to use it as a development framework and to manually fine-tune its configuration to new 
+datasets. A big driver for the reimplementation was also the emergence of [Helmholtz Imaging](http://helmholtz-imaging.de), 
+prompting us to extend nnU-Net to more image formats and domains. Take a look [here](documentation/changelog.md) for some highlights.
+
+# Acknowledgements
+<img src="documentation/assets/HI_Logo.png" height="100px" />
+
+<img src="documentation/assets/dkfz_logo.png" height="100px" />
+
+nnU-Net is developed and maintained by the Applied Computer Vision Lab (ACVL) of [Helmholtz Imaging](http://helmholtz-imaging.de) 
+and the [Division of Medical Image Computing](https://www.dkfz.de/en/mic/index.php) at the 
+[German Cancer Research Center (DKFZ)](https://www.dkfz.de/en/index.html).
