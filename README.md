@@ -82,6 +82,8 @@ sh train.sh
 ```
 ### Finetune
 Our finetune codes will soon be available, or you can directly use the codes in [MONAI](https://github.com/Project-MONAI/research-contributions).
+
+More finetune implementation are in preparation!
 ## Acknowledgement
 We thank [MONAI](https://github.com/Project-MONAI/research-contributions) for part of their codes.
 ## Citation ✏️ 📄
