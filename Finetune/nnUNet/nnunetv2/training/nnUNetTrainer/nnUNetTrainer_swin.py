@@ -152,6 +152,8 @@ class nnUNetTrainer_swin_pre(nnUNetTrainer):
 
 def delete_patch_embed(state_dict):
     for key in list(state_dict.keys()):
-        state_dict[key.replace("patch_embed", "bad")] = state_dict.pop(key)
+        state_dict[key.replace("swinViT.patch_embed", "bad")] = state_dict.pop(key)
+    for key in list(state_dict.keys()):
+        state_dict[key.replace("encoder1.layer", "bad")] = state_dict.pop(key)
 
     return state_dict
