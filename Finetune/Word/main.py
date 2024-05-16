@@ -51,7 +51,8 @@ parser.add_argument(
 )
 parser.add_argument("--data", default="word", type=str, help="dataset name")
 parser.add_argument("--out_channels", default=17, type=int, help="number of output channels")
-
+parser.add_argument(
+    "--pretrained_checkpoint",default="VoCo_10k.pt", type=str, help="VoCo_10k pretrained model")
 parser.add_argument(
     "--pretrained_model_name",
     default="model_bestVal.pt",
@@ -169,12 +170,8 @@ def main_worker(gpu, args):
             # model_VoCoEMA.pt
             # model_dict = torch.load("./pretrained_models/supervised_suprem_swinunetr_2100.pth", map_location=torch.device('cpu'))
             # model_dict = torch.load("./pretrained_models/model_VoCoEMA.pt", map_location=torch.device('cpu'))
-            model_dict = torch.load("/home/linshan/VoCo/runs/logs_10k_swinv2_abdomen/current_model.pth",
+            model_dict = torch.load(args.pretrained_checkpoint,
                                     map_location=torch.device('cpu'))
-            try:
-                state_dict = model_dict  # ["state_dict"]
-            except:
-                state_dict = model_dict["state_dict"]
             # state_dict = model_dict['net']
             # fix potential differences in state dict keys from pre-training to
             # fine-tuning
