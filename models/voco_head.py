@@ -139,7 +139,6 @@ class Swin(nn.Module):
 
     def forward(self, x_in):
         b = x_in.size()[0]
-        x_in = torch.cat([x_in, x_in], dim=2)
         hidden_states_out = self.swinViT(x_in)
 
         enc0 = self.encoder1(x_in)
