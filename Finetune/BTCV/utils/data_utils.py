@@ -99,7 +99,7 @@ def get_loader(args):
             transforms.RandScaleIntensityd(keys="image", factors=0.1, prob=args.RandScaleIntensityd_prob),
             transforms.RandShiftIntensityd(keys="image", offsets=0.1, prob=args.RandShiftIntensityd_prob),
             
-            transforms.ToTensord(keys=["image", "label"]),
+            # transforms.ToTensord(keys=["image", "label"]),
         ]
     )
     val_transform = transforms.Compose(
@@ -114,7 +114,7 @@ def get_loader(args):
                 keys=["image"], a_min=args.a_min, a_max=args.a_max, b_min=args.b_min, b_max=args.b_max, clip=True
             ),
             transforms.CropForegroundd(keys=["image", "label"], source_key="image"),
-            transforms.ToTensord(keys=["image", "label"]),
+            # transforms.ToTensord(keys=["image", "label"]),
         ]
     )
 
