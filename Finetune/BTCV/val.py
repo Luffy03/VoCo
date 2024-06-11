@@ -121,7 +121,7 @@ def main():
         num = np.zeros(13)
         dice_list_case = []
         for idx, batch_data in enumerate(val_loader):
-            img_name = batch_data["image_meta_dict"]["filename_or_obj"][0].split("/")[-1]
+            # img_name = batch_data["image_meta_dict"]["filename_or_obj"][0].split("/")[-1]
 
             if isinstance(batch_data, list):
                 data, target = batch_data
