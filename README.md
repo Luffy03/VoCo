@@ -90,10 +90,12 @@ We thank [MONAI](https://github.com/Project-MONAI/research-contributions) for pa
 If you find this repo useful for your research, please consider citing the paper as follows:
 
 ```
-@inproceedings{VoCo,
-  title={VoCo: A Simple-yet-Effective Volume Contrastive Learning Framework for 3D Medical Image Analysis},
-  author={Wu, Linshan and Zhuang, Jiaxin and Chen, Hao},
-  booktitle={IEEE Conf. Comput. Vis. Pattern Recog.},
-  year={2024}
-  }
+@InProceedings{voco,
+    author    = {Wu, Linshan and Zhuang, Jiaxin and Chen, Hao},
+    title     = {VoCo: A Simple-yet-Effective Volume Contrastive Learning Framework for 3D Medical Image Analysis},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {22873-22882}
+}
 ```
