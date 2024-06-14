@@ -36,7 +36,7 @@ def resize(img):
     return new_img
 
 
-def train_epoch(model, loader, optimizer, scaler, epoch, args):
+def train_epoch(model, loader, optimizer, scheduler, scaler, epoch, args):
     model.train()
     start_time = time.time()
     run_loss = AverageMeter()
@@ -57,16 +57,22 @@ def train_epoch(model, loader, optimizer, scaler, epoch, args):
 
         logits = model(data)
         loss = loss_func(logits, target)
-        print(logits.argmax(1)[0].item(), target[0].item())
+        # print(logits.argmax(1)[0].item(), target[0].item())
 
         loss.backward()
         optimizer.step()
         run_loss.update(loss.item(), n=args.batch_size)
 
-        if args.rank == 0:
+        lr = optimizer.param_groups[0]["lr"]
+        if scheduler is not None:
+            scheduler.step()
+
+        length = len(loader) // 4
+        if args.rank == 0 and (idx + 1) % length == 0:
             print(
                 "Epoch {}/{} {}/{}".format(epoch, args.max_epochs, idx, len(loader)),
                 "loss: {:.4f}".format(run_loss.avg),
+                "lr: {:.8f}".format(lr),
                 "time {:.2f}s".format(time.time() - start_time),
             )
         start_time = time.time()
@@ -147,7 +153,7 @@ def run_training(
         print(args.rank, time.ctime(), "Epoch:", epoch)
         epoch_time = time.time()
         train_loss = train_epoch(
-            model, train_loader, optimizer, scaler=scaler, epoch=epoch, args=args
+            model, train_loader, optimizer, scheduler, scaler=scaler, epoch=epoch, args=args
         )
         if args.rank == 0:
             print(
