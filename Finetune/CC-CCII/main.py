@@ -81,7 +81,7 @@ parser.add_argument("--out_channels", default=3, type=int, help="number of outpu
 parser.add_argument("--dropout_rate", default=0.0, type=float, help="dropout rate")
 parser.add_argument("--dropout_path_rate", default=0.0, type=float, help="drop path rate")
 parser.add_argument("--lrschedule", default="warmup_cosine", type=str, help="type of learning rate scheduler")
-# warmup is important !!!
+
 parser.add_argument("--warmup_epochs", default=5, type=int, help="number of warmup epochs")
 parser.add_argument("--resume_ckpt", action="store_true", help="resume training from pretrained checkpoint")
 parser.add_argument("--use_checkpoint", default=True, help="use gradient checkpointing to save memory")
@@ -202,8 +202,10 @@ def main_worker(gpu, args):
         raise ValueError("Unsupported Optimization Procedure: " + str(args.optim_name))
 
     if args.lrschedule == "warmup_cosine":
+        max_steps = args.max_epochs * len(loader[0])
+        warmup_steps = args.warmup_epochs * len(loader[0])
         scheduler = LinearWarmupCosineAnnealingLR(
-            optimizer, warmup_epochs=args.warmup_epochs, max_epochs=args.max_epochs
+            optimizer, warmup_epochs=warmup_steps, max_epochs=max_steps
         )
     elif args.lrschedule == "cosine_anneal":
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=args.max_epochs)
