@@ -28,7 +28,8 @@ class Swin(nn.Module):
             drop_path_rate=args.dropout_path_rate,
             norm_layer=torch.nn.LayerNorm,
             use_checkpoint=args.use_checkpoint,
-            spatial_dims=args.spatial_dims
+            spatial_dims=args.spatial_dims,
+            use_v2=True
         )
         norm_name = 'instance'
         self.encoder1 = UnetrBasicBlock(
