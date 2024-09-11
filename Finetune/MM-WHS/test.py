@@ -25,8 +25,16 @@ from monai.data import decollate_batch
 from monai.losses import DiceCELoss
 from monai.metrics import DiceMetric
 from monai.networks.nets import SwinUNETR
-from monai.transforms import Activations, AsDiscrete, Compose
+from monai.transforms import *
 from monai.utils.enums import MetricReduction
+from monai import data, transforms
+from monai.data import *
+from utils.utils import *
+import resource
+
+rlimit = resource.getrlimit(resource.RLIMIT_NOFILE)
+resource.setrlimit(resource.RLIMIT_NOFILE, (8192, rlimit[1]))
+print('Setting resource limit:', str(resource.getrlimit(resource.RLIMIT_NOFILE)))
 
 os.environ['CUDA_VISIBLE_DEVICES'] = "2"
 os.environ['MASTER_ADDR'] = 'localhost'
@@ -38,7 +46,10 @@ parser.add_argument(
 )
 parser.add_argument("--data_dir", default="/data/jiaxin/data/MM-WHS/ct_train/", type=str, help="dataset directory")
 parser.add_argument("--exp_name", default="MMWHS", type=str, help="experiment name")
-parser.add_argument("--json_list", default="./dataset_CT.json", type=str, help="dataset json file")
+
+parser.add_argument(
+    "--save_prediction_path", default="./pred/MM-WHS/", type=str, help="test_prediction_path")
+
 parser.add_argument(
     "--pretrained_model_name",
     default="model_0.9054.pt",
@@ -73,19 +84,66 @@ parser.add_argument("--spatial_dims", default=3, type=int, help="spatial dimensi
 parser.add_argument("--use_checkpoint", default=True, help="use gradient checkpointing to save memory")
 
 
+def get_test_loader(args):
+    """
+    Creates training transforms, constructs a dataset, and returns a dataloader.
+
+    Args:
+        args: Command line arguments containing dataset paths and hyperparameters.
+    """
+    test_transforms = transforms.Compose([
+        LoadImaged(keys=["image"]),
+        EnsureChannelFirstd(keys=["image"]),
+        Orientationd(keys=["image"], axcodes="RAS"),
+        Spacingd(keys=["image"], pixdim=(args.space_x, args.space_y, args.space_z),
+                 mode=("bilinear")),
+        ScaleIntensityRanged(
+            keys=["image"],
+            a_min=args.a_min,
+            a_max=args.a_max,
+            b_min=0.0,
+            b_max=1.0,
+            clip=True,
+        ),
+        CropForegroundd(keys=["image"], source_key="image"),
+        SpatialPadd(keys=["image"], spatial_size=(args.roi_x, args.roi_y, args.roi_z),
+                    mode='constant'),
+    ])
+
+    # constructing training dataset
+    test_img = []
+    test_name = []
+
+    dataset_list = os.listdir(args.data_dir)
+    check_dir(args.save_prediction_path)
+    already_exist_list = os.listdir(args.save_prediction_path)
+
+    for item in dataset_list:
+        if item not in already_exist_list:
+            name = item
+            test_img_path = os.path.join(args.test_data_path, name)
+            test_img.append(test_img_path)
+            test_name.append(name)
+
+    data_dicts_test = [{'image': image, 'name': name}
+                        for image, name in zip(test_img, test_name)]
+
+    print('test len {}'.format(len(data_dicts_test)))
+
+    test_ds = Dataset(data=data_dicts_test, transform=test_transforms)
+    test_loader = DataLoader(
+        test_ds, batch_size=1, shuffle=False, num_workers=args.workers, sampler=None, pin_memory=True
+    )
+    return test_loader, test_transforms
+
+
 def main():
     args = parser.parse_args()
-    args.test_mode = True
-    output_directory = "./outputs/" + args.exp_name
-    if not os.path.exists(output_directory):
-        os.makedirs(output_directory)
-    val_loader = get_loader(args)[1]
-    pretrained_dir = args.pretrained_dir
-    model_name = args.pretrained_model_name
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    pretrained_pth = os.path.join(pretrained_dir, model_name)
+
+    test_loader, test_transforms = get_test_loader(args)
+
     model = SwinUNETR(
-        img_size=(64, 64, 64),
+        img_size=(args.roi_x, args.roi_y, args.roi_z),
         in_channels=args.in_channels,
         out_channels=args.out_channels,
         feature_size=args.feature_size,
@@ -93,6 +151,7 @@ def main():
         attn_drop_rate=0.0,
         dropout_path_rate=0.0,
         use_checkpoint=args.use_checkpoint,
+        use_v2=True
     )
     inf_size = [args.roi_x, args.roi_y, args.roi_z]
     model_inferer = partial(
@@ -103,71 +162,53 @@ def main():
         overlap=args.infer_overlap,
     )
 
-    model_dict = torch.load(pretrained_pth)["state_dict"]
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model_dict = torch.load(args.trained_pth)["state_dict"]
     model.load_state_dict(model_dict, strict=True)
     model.eval()
     model.to(device)
 
+    # enable cuDNN benchmark
+    torch.backends.cudnn.benchmark = True
+
+    post_transforms = Compose([EnsureTyped(keys=["pred"]),
+                               Invertd(keys=["pred"],
+                                       transform=test_transforms,
+                                       orig_keys="image",
+                                       meta_keys="pred_meta_dict",
+                                       orig_meta_keys="image_meta_dict",
+                                       meta_key_postfix="meta_dict",
+                                       nearest_interp=True,
+                                       to_tensor=True),
+                               AsDiscreted(keys="pred", argmax=False, to_onehot=None),
+                               SaveImaged(keys="pred", meta_keys="pred_meta_dict", output_dir=args.save_prediction_path,
+                                          separate_folder=False, folder_layout=None,
+                                          resample=False),
+                               ])
+
     with torch.no_grad():
-        all_dice = None
-        num = np.zeros(7)
-        dice_list_case = []
-        for idx, batch_data in enumerate(val_loader):
-            img_name = batch_data["image_meta_dict"]["filename_or_obj"][0].split("/")[-1]
+        for idx, batch_data in enumerate(test_loader):
+            torch.cuda.empty_cache()
 
-            if isinstance(batch_data, list):
-                data, target = batch_data
-            else:
-                data, target = batch_data["image"], batch_data["label"]
-            data, target = data.cuda(), target.cuda()
-            with autocast(enabled=False):
-                if model_inferer is not None:
-                    logits = model_inferer(data)
-                else:
-                    logits = model(data)
-            if not logits.is_cuda:
-                target = target.cpu()
+            data = batch_data["image"]
+            data = data.cuda()
 
-            outputs = torch.argmax(logits, 1).cpu().numpy()
-            outputs = outputs.astype(np.uint8)[0]
-            val_labels = target.cpu().numpy()[0, 0, :, :, :]
+            name = batch_data['name'][0]
 
-            len_class = len(list(np.unique(val_labels))) - 1
-            dice_list_sub = []
-            for i in range(1, 8):
-                # judge this class exist or not, ignore background
-                num[i - 1] += (np.sum(val_labels == i) > 0).astype(np.uint8)
-                organ_Dice = dice(outputs == i, val_labels == i)
-                dice_list_sub.append(organ_Dice)
+            with autocast(enabled=True):
+                logits = model_inferer(data)
 
-            mean_dice = np.sum(dice_list_sub) / len_class
-            print("Mean Organ Dice: {}".format(mean_dice))
+            logits = logits.argmax(1)
+            output = logits
 
-            # acc of each organ
-            print("Organ Dice:", dice_list_sub)
+            print(torch.unique(output))
 
-            if all_dice is None:
-                all_dice = (np.asarray(dice_list_sub)).copy()
-            else:
-                all_dice = all_dice + np.asarray(dice_list_sub)
-            print("Organ Dice accumulate:", all_dice*100 / num)
+            batch_data['pred'] = output.unsqueeze(1)
+            batch_data = [post_transforms(i) for i in
+                          decollate_batch(batch_data)]
 
-            dice_list_case.append(mean_dice)
-            print("Overall Mean Dice: {}".format(100*np.mean(dice_list_case)))
-
-            # # save predict
-            print(logits.shape)
-            val_outputs = torch.argmax(logits, 1).cpu().numpy()
-            np.save(os.path.join(output_directory, 'pre'+ img_name[9:13]+'.npy'), val_outputs.astype(np.uint8)[0])
-            # save label
-            val_labels = target.cpu().numpy()
-            np.save(os.path.join(output_directory, 'label' + img_name[9:13] + '.npy'), val_labels.astype(np.uint8)[0][0])
-
-            # save input
-            img = data.cpu().numpy()
-            img = img * 255
-            print(np.max(img))
-            np.save(os.path.join(output_directory, 'img' + img_name[9:13] + '.npy'), img.astype(np.uint8)[0][0])
+            os.rename(os.path.join(args.save_prediction_path, name[:-7]+'_trans.nii.gz'),
+                      os.path.join(args.save_prediction_path, name))
 
 
 if __name__ == "__main__":
