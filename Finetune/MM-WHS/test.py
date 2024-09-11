@@ -59,7 +59,7 @@ parser.add_argument(
 roi=64
 parser.add_argument("--feature_size", default=48, type=int, help="feature size")
 parser.add_argument("--batch_size", default=1, type=int, help="number of batch size")
-parser.add_argument("--sw_batch_size", default=8, type=int, help="number of sliding window batch size")
+parser.add_argument("--sw_batch_size", default=2, type=int, help="number of sliding window batch size")
 parser.add_argument("--infer_overlap", default=0.7, type=float, help="sliding window inference overlap")
 parser.add_argument("--in_channels", default=1, type=int, help="number of input channels")
 parser.add_argument("--out_channels", default=8, type=int, help="number of output channels")
@@ -119,9 +119,9 @@ def get_test_loader(args):
     already_exist_list = os.listdir(args.save_prediction_path)
 
     for item in dataset_list:
-        if item not in already_exist_list:
+        if item not in already_exist_list and item.endswith('_image.nii.gz'):
             name = item
-            test_img_path = os.path.join(args.test_data_path, name)
+            test_img_path = os.path.join(args.data_dir, name)
             test_img.append(test_img_path)
             test_name.append(name)
 
