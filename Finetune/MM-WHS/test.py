@@ -46,7 +46,8 @@ parser.add_argument(
 )
 parser.add_argument("--data_dir", default="/data/jiaxin/data/MM-WHS/ct_train/", type=str, help="dataset directory")
 parser.add_argument("--exp_name", default="MMWHS", type=str, help="experiment name")
-
+parser.add_argument(
+    "--trained_pth", default="./runs/logs/model.pt", type=str, help="your trained checkpoint directory")
 parser.add_argument(
     "--save_prediction_path", default="./pred/MM-WHS/", type=str, help="test_prediction_path")
 
