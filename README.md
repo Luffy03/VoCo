@@ -92,6 +92,12 @@ We thank [MONAI](https://github.com/Project-MONAI/research-contributions) for pa
 If you find this repo useful for your research, please consider citing the paper as follows:
 
 ```
+@article{wu2024large,
+  title={Large-Scale 3D Medical Image Pre-training with Geometric Context Priors},
+  author={Wu, Linshan and Zhuang, Jiaxin and Chen, Hao},
+  journal={arXiv preprint arXiv:2410.09890},
+  year={2024}
+}
 @InProceedings{voco,
     author    = {Wu, Linshan and Zhuang, Jiaxin and Chen, Hao},
     title     = {VoCo: A Simple-yet-Effective Volume Contrastive Learning Framework for 3D Medical Image Analysis},
