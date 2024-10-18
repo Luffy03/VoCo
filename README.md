@@ -7,7 +7,7 @@ Code for CVPR 2024 paper, [**"VoCo: A Simple-yet-Effective Volume Contrastive Le
 
 Authors: Linshan Wu, <a href="https://scholar.google.com/citations?user=PfM5gucAAAAJ&hl=en">Jiaxin Zhuang</a>, and <a href="https://scholar.google.com/citations?hl=en&user=Z_t5DjwAAAAJ">Hao Chen</a>
 
-This work presents VoCo, a simple-yet-effective contrastive learning framework for pre-training large scale 3D medical images. Our **10k CT images pre-training** model are available. Our **160k CT images pre-training** models are comming soon!
+This work presents VoCo, a simple-yet-effective contrastive learning framework for pre-training large scale 3D medical images. Our **10k CT images pre-training** model are available. Our **160k CT images pre-training** models are available!
 
 **Our extention is at [**Large-Scale-Medical**](https://github.com/Luffy03/Large-Scale-Medical), which provides stronger models, larger-scale datasets, various training recipes, and more downstream tasks!!!**
 
