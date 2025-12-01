@@ -86,11 +86,12 @@ We thank [MONAI](https://github.com/Project-MONAI/research-contributions) for pa
 If you find this repo useful for your research, please consider citing the paper as follows:
 
 ```
-@article{wu2024large,
+@article{voco,
   title={Large-Scale 3D Medical Image Pre-training with Geometric Context Priors},
   author={Wu, Linshan and Zhuang, Jiaxin and Chen, Hao},
-  journal={arXiv preprint arXiv:2410.09890},
-  year={2024}
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2025},
+  publisher={IEEE}
 }
 @InProceedings{voco,
     author    = {Wu, Linshan and Zhuang, Jiaxin and Chen, Hao},
